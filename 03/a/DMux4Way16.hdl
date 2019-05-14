@@ -1,0 +1,16 @@
+CHIP DMux4Way16{
+    IN in[16],sel[2];
+    OUT a[16],b[16],c[16],d[16];
+
+    PARTS:
+    // Put your code here:
+    
+    DMux16(in=in,sel=sel[0],a=a1,b=b1);
+    DMux16(in=in,sel=sel[0],a=c1,b=d1);
+    Not16(in[0]=sel[1],in[1]=sel[1],in[2]=sel[1],in[3]=sel[1],in[4]=sel[1],in[5]=sel[1],in[6]=sel[1],in[7]=sel[1],in[8]=sel[1],in[9]=sel[1],in[10]=sel[1],in[11]=sel[1],in[12]=sel[1],in[13]=sel[1],in[14]=sel[1],in[15]=sel[1],out=nots1);
+    And16(a=a1,b=nots1,out=a);
+    And16(a=b1,b=nots1,out=b);
+    And16(a=c1,b[0]=sel[1],b[1]=sel[1],b[2]=sel[1],b[3]=sel[1],b[4]=sel[1],b[5]=sel[1],b[6]=sel[1],b[7]=sel[1],b[8]=sel[1],b[9]=sel[1],b[10]=sel[1],b[11]=sel[1],b[12]=sel[1],b[13]=sel[1],b[14]=sel[1],b[15]=sel[1],out=c);
+    And16(a=d1,b[0]=sel[1],b[1]=sel[1],b[2]=sel[1],b[3]=sel[1],b[4]=sel[1],b[5]=sel[1],b[6]=sel[1],b[7]=sel[1],b[8]=sel[1],b[9]=sel[1],b[10]=sel[1],b[11]=sel[1],b[12]=sel[1],b[13]=sel[1],b[14]=sel[1],b[15]=sel[1],out=d);
+}
+

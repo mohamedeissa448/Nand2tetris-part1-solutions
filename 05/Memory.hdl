@@ -30,13 +30,12 @@ CHIP Memory {
     // Put your code here:
     RAM16K(in=in,load=load1,address=address[0..13],out=out1);
     Screen(in=in,load=load2,address=address[0..12],out=out2);
-
-
     Keyboard(out=out3);
-
-
     DMux(in=load,sel=address[14],a=load1,b=load2);
-    Mux16(a=out1,b=out2,sel=address[14],out=firstout);
-    Mux16(a=firstout,b=out3,sel=special,out=out);
-    And(a=address[14],b=address[13],out=special);
+    Mux16(a=out1,b=out2,sel=address[14],out=first);
+    And(a=address[14],b=address[13],out=isKeyBoard);
+
+    And16(a=true,b[0]=isKeyBoard,b[1]=isKeyBoard,b[2]=isKeyBoard,b[3]=isKeyBoard,b[4]=isKeyBoard,b[5]=isKeyBoard,b[6]=isKeyBoard,b[7]=isKeyBoard,b[8]=isKeyBoard,b[9]=isKeyBoard,b[10]=isKeyBoard,b[11]=isKeyBoard,b[12]=isKeyBoard,b[13]=isKeyBoard,b[14]=isKeyBoard,b[15]=isKeyBoard,out=isKeyBoardSelected);
+    And16(a=out3,b=isKeyBoardSelected,out=second);
+    Mux16(a=first,b=second,sel=isKeyBoard,out=out);
 }
